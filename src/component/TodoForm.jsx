@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function TodoForm() {
   const [input, setInput] = useState("");
+  const [todos, setTodos] = useState([]);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -10,6 +11,7 @@ function TodoForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(input);
+    setTodos([...todos, input]);
     setInput("");
   };
 
@@ -24,6 +26,12 @@ function TodoForm() {
         />
         <button type="submit">add Todo</button>
       </form>
+
+      <ul>
+        {todos.map((todo, idx) => (
+          <li key={idx}>{todo}</li>
+        ))}
+      </ul>
     </div>
   );
 }
