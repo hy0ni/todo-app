@@ -10,7 +10,11 @@ function TodoForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+
+    if (!input.trim()) {
+      return;
+    }
+    
     setTodos([...todos, input]);
     setInput("");
   };
