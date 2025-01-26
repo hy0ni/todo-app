@@ -14,9 +14,13 @@ function TodoForm() {
     if (!input.trim()) {
       return;
     }
-    
-    setTodos([...todos, input]);
+
+    setTodos([...todos, { id: Date.now(), text: input }]);
     setInput("");
+  };
+
+  const handleDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -32,8 +36,11 @@ function TodoForm() {
       </form>
 
       <ul>
-        {todos.map((todo, idx) => (
-          <li key={idx}>{todo}</li>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button onClick={() => handleDelete(todo.id)}>삭제</button>
+          </li>
         ))}
       </ul>
     </div>
